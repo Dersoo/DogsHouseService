@@ -1,3 +1,6 @@
+using DogsHouseWebAPI.EF;
+using Microsoft.EntityFrameworkCore;
+
 namespace DogsHouseWebAPI
 {
     public class Program
@@ -12,6 +15,10 @@ namespace DogsHouseWebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            var connectionString = builder.Configuration.GetConnectionString("Default");
+
+            builder.Services.AddDbContextFactory<DogsHouseContext>(opt => opt.UseSqlServer(connectionString));
 
             var app = builder.Build();
 
