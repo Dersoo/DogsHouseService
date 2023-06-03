@@ -29,7 +29,7 @@ namespace DogsHouseWebAPI.EF
             }
         }
 
-        public DbSet<Dog> Dog { get; set; }
+        public DbSet<Dog> Dogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
