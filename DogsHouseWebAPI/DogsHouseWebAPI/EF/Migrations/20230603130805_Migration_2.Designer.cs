@@ -3,6 +3,7 @@ using DogsHouseWebAPI.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DogsHouseWebAPI.EF.Migrations
 {
     [DbContext(typeof(DogsHouseContext))]
-    partial class DogsHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20230603130805_Migration_2")]
+    partial class Migration_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,4 +1,5 @@
-﻿using DogsHouseWebAPI.Models;
+﻿using DogsHouseWebAPI.EF.Configuration;
+using DogsHouseWebAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
@@ -33,7 +34,7 @@ namespace DogsHouseWebAPI.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.ApplyConfiguration(new DogsConfiguration());
         }
 
         public string GetTableName(Type type)
