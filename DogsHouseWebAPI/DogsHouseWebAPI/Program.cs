@@ -1,5 +1,7 @@
+using Contracts;
 using Entities.EF;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 
 namespace DogsHouseWebAPI
 {
@@ -18,7 +20,8 @@ namespace DogsHouseWebAPI
 
             var connectionString = builder.Configuration.GetConnectionString("Default");
 
-            builder.Services.AddDbContextFactory<DogsHouseContext>(opt => opt.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<DogsHouseContext>(opt => opt.UseSqlServer(connectionString));
+            builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             var app = builder.Build();
 
