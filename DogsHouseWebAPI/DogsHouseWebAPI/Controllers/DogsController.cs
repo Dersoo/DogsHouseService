@@ -65,6 +65,11 @@ namespace DogsHouseWebAPI.Controllers
                 return BadRequest("Dog object is null");
             }
 
+            if (_repository.Dogs.GetDogByName(dog.Name) != null)
+            {
+                return BadRequest("Dog with the same name already exists");
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid model object");

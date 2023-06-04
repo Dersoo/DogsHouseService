@@ -33,6 +33,12 @@ namespace Repository
                 .FirstOrDefault();
         }
 
+        public Dog GetDogByName(string dogName)
+        {
+            return FindByCondition(dog => dog.Name.Equals(dogName)).AsEnumerable()
+                .FirstOrDefault();
+        }
+
         public void CreateDog(Dog dog)
         {
             Create(dog);

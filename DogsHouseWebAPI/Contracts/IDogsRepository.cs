@@ -7,6 +7,7 @@ namespace Contracts
     {
         PagedList<Dog> GetDogs(DogParameters dogParameters);
         Dog GetDogById(int dogId);
+        Dog GetDogByName(string dogName);
         void CreateDog(Dog dog);
         void UpdateDog(Dog dbDog, Dog dog);
         void DeleteDog(Dog dog);
