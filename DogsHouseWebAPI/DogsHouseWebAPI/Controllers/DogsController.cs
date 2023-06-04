@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Entities.EF;
 using Entities.Models;
 using Contracts;
 using Newtonsoft.Json;
@@ -12,7 +11,7 @@ namespace DogsHouseWebAPI.Controllers
     {
         private IRepositoryWrapper _repository;
 
-        public DogsController(DogsHouseContext context, IRepositoryWrapper repository)
+        public DogsController(IRepositoryWrapper repository)
         {
             _repository = repository;
         }
