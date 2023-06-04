@@ -21,7 +21,7 @@ namespace DogsHouseWebAPI.EF
             if (!optionsBuilder.IsConfigured)
             {
                 var connectionString =
-                    @"server=(LocalDb)\MSSQLLocalDB;database=DogsHouse;
+                    @"server=DESKTOP-EGV2TP5\\SQLEXPRESS;database=DogsHouse;
                       integrated security=True;TrustServerCertificate=True; MultipleActiveResultSets=True;
                       App=EntityFramework;";
                 optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure())
