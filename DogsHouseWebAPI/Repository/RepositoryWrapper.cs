@@ -1,5 +1,7 @@
 ﻿using Contracts;
 using Entities.EF;
+using Entities.Helpers.SortHelper;
+using Entities.Models;
 
 namespace Repository
 {
@@ -7,6 +9,7 @@ namespace Repository
     {
         private DogsHouseContext _repoContext;
         private IDogsRepository _dogs;
+        private ISortHelper<Dog> _dogSortHelper;
 
         public IDogsRepository Dogs
         {
@@ -14,16 +17,17 @@ namespace Repository
             {
                 if (_dogs == null)
                 {
-                    _dogs = new DogsRepository(_repoContext);
+                    _dogs = new DogsRepository(_repoContext, _dogSortHelper);
                 }
 
                 return _dogs;
             }
         }
 
-        public RepositoryWrapper(DogsHouseContext repositoryContext)
+        public RepositoryWrapper(DogsHouseContext repositoryContext, ISortHelper<Dog> dogSortHelper)
         {
             _repoContext = repositoryContext;
+            _dogSortHelper = dogSortHelper;
         }
 
         public void Save()

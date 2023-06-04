@@ -1,5 +1,7 @@
 using Contracts;
 using Entities.EF;
+using Entities.Helpers.SortHelper;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 
@@ -22,6 +24,7 @@ namespace DogsHouseWebAPI
 
             builder.Services.AddDbContext<DogsHouseContext>(opt => opt.UseSqlServer(connectionString));
             builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            builder.Services.AddScoped<ISortHelper<Dog>, SortHelper<Dog>>();
 
             var app = builder.Build();
 

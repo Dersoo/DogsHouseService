@@ -11,12 +11,10 @@ namespace DogsHouseWebAPI.Controllers
     [ApiController]
     public class DogsController : ControllerBase
     {
-        private readonly DogsHouseContext _context;
         private IRepositoryWrapper _repository;
 
         public DogsController(DogsHouseContext context, IRepositoryWrapper repository)
         {
-            _context = context;
             _repository = repository;
         }
 

@@ -17,5 +17,6 @@
             }
         }
         public int PageNumber { get; set; } = 1;
+        public string OrderBy { get; set; }
     }
 }
