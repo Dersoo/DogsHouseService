@@ -1,4 +1,6 @@
+using AspNetCoreRateLimit;
 using Contracts;
+using DogsHouseWebAPI.Middlewares;
 using Entities.EF;
 using Entities.Helpers.SortHelper;
 using Entities.Models;
@@ -26,6 +28,29 @@ namespace DogsHouseWebAPI
             builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             builder.Services.AddScoped<ISortHelper<Dog>, SortHelper<Dog>>();
 
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            builder.Services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            builder.Services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+            builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            builder.Services.AddInMemoryRateLimiting();
+            builder.Services.Configure<ClientRateLimitOptions>(options =>
+            {
+                options.EnableEndpointRateLimiting = true;
+                options.StackBlockedRequests = false;
+                options.HttpStatusCode = 429;
+                options.ClientIdHeader = "X-ClientId";
+                options.GeneralRules = new List<RateLimitRule>
+                {
+                    new RateLimitRule
+                    {
+                        Endpoint = "*",
+                        Period = "1s",
+                        Limit = 10
+                    }
+                };
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -35,11 +60,11 @@ namespace DogsHouseWebAPI
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<CustomClientRateLimitMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();
