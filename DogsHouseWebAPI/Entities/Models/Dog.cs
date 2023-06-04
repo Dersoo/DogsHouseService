@@ -16,9 +16,11 @@ namespace Entities.Models
         public string Color { get; set; } = String.Empty;
 
         [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter integer number ( > 0) for Tail Length")]
         public ushort TailLength { get; set; }
 
         [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter integer number ( > 0) for Weight")]
         public ushort Weight { get; set; }
 
         [Timestamp]

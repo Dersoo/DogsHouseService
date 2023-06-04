@@ -8,7 +8,11 @@ namespace Entities.EF.Configuration
     {
         public void Configure(EntityTypeBuilder<Dog> builder)
         {
+            builder.HasIndex(u => u.Name)
+                   .IsUnique();
+
             builder.ToTable("Dogs");
+
 
             builder.HasData
             (

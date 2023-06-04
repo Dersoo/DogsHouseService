@@ -21,7 +21,7 @@ namespace Entities.EF
             if (!optionsBuilder.IsConfigured)
             {
                 var connectionString =
-                    @"server=DESKTOP-EGV2TP5\\SQLEXPRESS;database=DogsHouse;
+                    @"server=(LocalDb)\MSSQLLocalDB;database=DogsHouse;
                       integrated security=True;TrustServerCertificate=True; MultipleActiveResultSets=True;
                       App=EntityFramework;";
                 optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure())
