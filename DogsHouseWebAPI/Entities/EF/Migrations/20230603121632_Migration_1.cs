@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DogsHouseWebAPI.EF.Migrations
+namespace Entities.EF.Migrations
 {
     /// <inheritdoc />
     public partial class Migration_1 : Migration

@@ -1,9 +1,9 @@
-﻿using DogsHouseWebAPI.EF.Configuration;
-using DogsHouseWebAPI.Models;
+﻿using Entities.EF.Configuration;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace DogsHouseWebAPI.EF
+namespace Entities.EF
 {
     public class DogsHouseContext : DbContext
     {

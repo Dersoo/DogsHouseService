@@ -1,8 +1,8 @@
-﻿using DogsHouseWebAPI.EF;
-using DogsHouseWebAPI.Models;
+﻿using Entities.EF;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DogsHouseWebAPI.DataInitialization
+namespace Repository.DataInitialization
 {
     public static class DataInitializer
     {

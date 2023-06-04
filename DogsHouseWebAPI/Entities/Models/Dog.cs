@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DogsHouseWebAPI.Models
+namespace Entities.Models
 {
     public class Dog
     {

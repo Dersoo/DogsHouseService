@@ -1,8 +1,8 @@
-﻿using DogsHouseWebAPI.Models;
+﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DogsHouseWebAPI.EF.Configuration
+namespace Entities.EF.Configuration
 {
     public class DogsConfiguration : IEntityTypeConfiguration<Dog>
     {

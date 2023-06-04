@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace DogsHouseWebAPI.EF.Migrations
+namespace Entities.EF.Migrations
 {
     /// <inheritdoc />
     public partial class Migration_2 : Migration

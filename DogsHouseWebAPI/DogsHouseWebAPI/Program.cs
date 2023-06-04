@@ -1,4 +1,4 @@
-using DogsHouseWebAPI.EF;
+using Entities.EF;
 using Microsoft.EntityFrameworkCore;
 
 namespace DogsHouseWebAPI
