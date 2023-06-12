@@ -2,6 +2,6 @@
 {
     public interface ISortHelper<T>
     {
-        IQueryable<T> ApplySort(IQueryable<T> entities, string orderByQueryString);
+        IEnumerable<T> ApplySort(IEnumerable<T> entities, string orderByQueryString);
     }
 }

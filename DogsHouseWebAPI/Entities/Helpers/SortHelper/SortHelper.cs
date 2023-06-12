@@ -6,7 +6,7 @@ namespace Entities.Helpers.SortHelper
 {
     public class SortHelper<T> : ISortHelper<T>
     {
-        public IQueryable<T> ApplySort(IQueryable<T> entities, string orderByQueryString)
+        public IEnumerable<T> ApplySort(IEnumerable<T> entities, string orderByQueryString)
         {
             if (!entities.Any())
                 return entities;
@@ -38,7 +38,7 @@ namespace Entities.Helpers.SortHelper
 
             var orderQuery = orderQueryBuilder.ToString().TrimEnd(',', ' ');
 
-            return entities.OrderBy(orderQuery);
+            return entities.AsQueryable().OrderBy(orderQuery).ToList();
         }
     }
 }

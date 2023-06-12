@@ -17,9 +17,9 @@ namespace DogsHouseWebAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetDogs([FromQuery] DogParameters dogParameters)
+        public async Task<IActionResult> GetDogs([FromQuery] DogParameters dogParameters)
         {
-            var dogs = _repository.Dogs.GetDogs(dogParameters);
+            var dogs = await _repository.Dogs.GetDogs(dogParameters);
 
             if (dogs == null)
             {
@@ -42,9 +42,9 @@ namespace DogsHouseWebAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "DogById")]
-        public IActionResult GetDogById(int id)
+        public async Task<IActionResult> GetDogById(int id)
         {
-            var dog = _repository.Dogs.GetDogById(id);
+            var dog =  await _repository.Dogs.GetDogById(id);
 
             if (dog == null)
             {
@@ -57,14 +57,14 @@ namespace DogsHouseWebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDog([FromBody] Dog dog)
+        public async Task<IActionResult> CreateDog([FromBody] Dog dog)
         {
             if (dog == null)
             {
                 return BadRequest("Dog object is null");
             }
 
-            if (_repository.Dogs.GetDogByName(dog.Name) != null)
+            if (await _repository.Dogs.GetDogByName(dog.Name) != null)
             {
                 return BadRequest("Dog with the same name already exists");
             }
@@ -74,14 +74,13 @@ namespace DogsHouseWebAPI.Controllers
                 return BadRequest("Invalid model object");
             }
 
-            _repository.Dogs.CreateDog(dog);
-            _repository.Save();
+            await _repository.Dogs.CreateDog(dog);
 
             return CreatedAtRoute("DogById", new { id = dog.Id }, dog);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateDog(int id, [FromBody] Dog dog)
+        public async Task <IActionResult> UpdateDog(int id, [FromBody] Dog dog)
         {
             if (dog == null)
             {
@@ -93,31 +92,29 @@ namespace DogsHouseWebAPI.Controllers
                 return BadRequest("Invalid model object");
             }
 
-            var dbDog = _repository.Dogs.GetDogById(id);
+            var dbDog = await _repository.Dogs.GetDogById(id);
 
             if (dbDog == null)
             {
                 return NotFound();
             }
 
-            _repository.Dogs.UpdateDog(dbDog, dog);
-            _repository.Save();
+            await _repository.Dogs.UpdateDog(dbDog, dog);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteDog(int id)
+        public async Task<IActionResult> DeleteDog(int id)
         {
-            var dog = _repository.Dogs.GetDogById(id);
+            var dog = await _repository.Dogs.GetDogById(id);
 
             if (dog == null)
             {
                 return NotFound();
             }
 
-            _repository.Dogs.DeleteDog(dog);
-            _repository.Save();
+            await _repository.Dogs.DeleteDog(dog);
 
             return NoContent();
         }

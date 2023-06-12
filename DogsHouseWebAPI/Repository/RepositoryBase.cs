@@ -14,32 +14,37 @@ namespace Repository
             this.RepositoryContext = repositoryContext;
         }
 
-        public IQueryable<T> FindAll()
+        public async Task<IEnumerable<T>> FindAll()
         {
-            return this.RepositoryContext.Set<T>()
-                .AsNoTracking();
+            return await this.RepositoryContext.Set<T>()
+                .AsNoTracking()
+                .ToListAsync();
         }
 
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+        public async Task<IEnumerable<T>> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return this.RepositoryContext.Set<T>()
+            return await this.RepositoryContext.Set<T>()
+                .AsNoTracking()
                 .Where(expression)
-                .AsNoTracking();
+                .ToListAsync();
         }
 
-        public void Create(T entity)
+        public async Task Create(T entity)
         {
             this.RepositoryContext.Set<T>().Add(entity);
+            await this.RepositoryContext.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             this.RepositoryContext.Set<T>().Update(entity);
+            await this.RepositoryContext.SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
             this.RepositoryContext.Set<T>().Remove(entity);
+            await this.RepositoryContext.SaveChangesAsync();
         }
     }
 }

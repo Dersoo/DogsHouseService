@@ -5,11 +5,11 @@ namespace Contracts
 {
     public interface IDogsRepository : IRepositoryBase<Dog>
     {
-        PagedList<Dog> GetDogs(DogParameters dogParameters);
-        Dog GetDogById(int dogId);
-        Dog GetDogByName(string dogName);
-        void CreateDog(Dog dog);
-        void UpdateDog(Dog dbDog, Dog dog);
-        void DeleteDog(Dog dog);
+        Task<PagedList<Dog>> GetDogs(DogParameters dogParameters);
+        Task<Dog> GetDogById(int dogId);
+        Task<Dog> GetDogByName(string dogName);
+        Task CreateDog(Dog dog);
+        Task UpdateDog(Dog dbDog, Dog dog);
+        Task DeleteDog(Dog dog);
     }
 }

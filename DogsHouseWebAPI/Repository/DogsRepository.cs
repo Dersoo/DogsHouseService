@@ -17,42 +17,45 @@ namespace Repository
             _sortHelper = sortHelper;
         }
 
-        public PagedList<Dog> GetDogs(DogParameters dogParameters)
+        public async Task<PagedList<Dog>> GetDogs(DogParameters dogParameters)
         {
-            var sortedDogs = _sortHelper.ApplySort(FindAll(), dogParameters.OrderBy);
+            var sortedDogs = _sortHelper.ApplySort(await FindAll(), dogParameters.OrderBy);
 
             return PagedList<Dog>.ToPagedList(sortedDogs,
                 dogParameters.PageNumber,
                 dogParameters.PageSize);
         }
 
-        public Dog GetDogById(int dogId)
+        public async Task<Dog> GetDogById(int dogId)
         {
-            return FindByCondition(dog => dog.Id.Equals(dogId)).AsEnumerable()
+            var dogs = await FindByCondition(dog => dog.Id.Equals(dogId));
+
+            return dogs
                 .DefaultIfEmpty(new Dog())
                 .FirstOrDefault();
         }
 
-        public Dog GetDogByName(string dogName)
+        public async Task<Dog> GetDogByName(string dogName)
         {
-            return FindByCondition(dog => dog.Name.Equals(dogName)).AsEnumerable()
-                .FirstOrDefault();
+            var dogs = await FindByCondition(dog => dog.Name.Equals(dogName));
+
+            return dogs.FirstOrDefault();
         }
 
-        public void CreateDog(Dog dog)
+        public async Task CreateDog(Dog dog)
         {
-            Create(dog);
+            await Create(dog);
         }
 
-        public void UpdateDog(Dog dbDog, Dog dog)
+        public async Task UpdateDog(Dog dbDog, Dog dog)
         {
             dbDog.Map(dog);
-            Update(dbDog);
+            await Update(dbDog);
         }
 
-        public void DeleteDog(Dog dog)
+        public async Task DeleteDog(Dog dog)
         {
-            Delete(dog);
+            await Delete(dog);
         }
     }
 }
